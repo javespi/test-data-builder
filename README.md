@@ -4,4 +4,4 @@
 
 **Run the tests**
 
-*phpunit tests*
+*vendor/bin/phpunit tests*

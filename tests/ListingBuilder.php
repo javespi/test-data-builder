@@ -57,4 +57,9 @@ class ListingBuilder
             $this->monthlyPrice
         );
     }
+
+    public function but(): self
+    {
+        return clone $this;
+    }
 }

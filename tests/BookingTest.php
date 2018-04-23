@@ -227,6 +227,37 @@ class BookingTest extends TestCase
 
         $this->assertTrue($bookingB->totalPrice() < $bookingA->totalPrice());
     }
+
+    /**
+     * @test
+     */
+    public function listingsShouldBeDifferent()
+    {
+        $listingOne = aListing()->withId('1')->withLandlordId('xx')->withMonthlyPrice(100);
+        $listingTwo = $listingOne->but()->withId('1')->withLandlordId('xx');
+
+        $tenantHomer = aTenant()->withFullName('Homer Simpson')->withPhoneNumber('555-7334')->withEmail('chunkylover53@aol.com');
+
+        $bookingA = aBooking()
+            ->withTenant($tenantHomer->build())
+            ->withListing($listingOne->build())
+            ->checkingInOn(new \DateTimeImmutable('2018-05-01'))
+            ->checkingOutOn(new \DateTimeImmutable('2019-01-31'));
+
+        $bookingB = $bookingA->but()->withListing($listingTwo->build());
+
+        var_dump(
+            $bookingA->build()->listing()
+        );
+
+        var_dump(
+            $bookingB->build()->listing()
+        );
+
+        var_dump(
+            $bookingA->build()->listing() === $bookingB->build()->listing()
+        );
+    }
 }
 
 function aBooking(): BookingBuilder

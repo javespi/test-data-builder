@@ -62,4 +62,9 @@ class Booking
 
         return ($diff->y * 12) + $diff->m + ($diff->d > 0 ? 1 : 0);
     }
+
+    public function listing(): Listing
+    {
+        return $this->listing;
+    }
 }

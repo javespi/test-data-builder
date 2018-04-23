@@ -32,4 +32,9 @@ class Listing
     {
         return $this->monthlyPrice;
     }
+
+    public function id(): string
+    {
+        return $this->id;
+    }
 }
